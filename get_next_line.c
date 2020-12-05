@@ -6,12 +6,25 @@
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 15:32:28 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/05 09:43:46 by kzennoun         ###   ########lyon.fr   */
+/*   Updated: 2020/12/05 11:34:47 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+
 int get_next_line(int fd, char **line)
 {
+	static char		*buffer;
+
+	if (!buffer)
+		if (!(buffer = malloc(sizeof(char) * BUFFER_SIZE)))
+			return (NULL);
+
+	read(fd, buffer, BUFFER_SIZE);
+
+	//if EOF free buffer
+
+	//if malloc problem free buffer
 
 }
 
