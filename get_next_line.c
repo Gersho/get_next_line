@@ -6,7 +6,7 @@
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 15:32:28 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/03 16:58:56 by kzennoun         ###   ########lyon.fr   */
+/*   Updated: 2020/12/05 09:43:46 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,7 @@ read, malloc, free
 Description 
 Ecrivez une fonction qui retourne une ligne lue
 depuis un file descriptor, sans le retour à laligne
+
+
+gcc -Wall -Wextra -Werror -D BUFFER_SIZE=32 get_next_line.cget_next_line_utils.c
 */
