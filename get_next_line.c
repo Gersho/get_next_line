@@ -6,26 +6,48 @@
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 15:32:28 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/05 11:34:47 by kzennoun         ###   ########lyon.fr   */
+/*   Updated: 2020/12/07 14:57:07 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "get_next_line.h"
 
 int get_next_line(int fd, char **line)
 {
-	static char		*buffer;
+	static char		*stock;
+	char			*buffer;
+	ssize_t			read_result;
 
-	if (!buffer)
-		if (!(buffer = malloc(sizeof(char) * BUFFER_SIZE)))
-			return (NULL);
+	if (!(buffer = malloc(sizeof(char) * BUFFER_SIZE)))
+		return (NULL);
 
-	read(fd, buffer, BUFFER_SIZE);
+	read_result = read(fd, buffer, BUFFER_SIZE);
+	if (read_result == -1)
+	{	
+		//free ?
+		return (-1);
+	}
+	if(stock &&)
+	
 
-	//if EOF free buffer
+	//read result == number of bytes read
+	
+	
 
-	//if malloc problem free buffer
+	//read returns
+	// -1 error
+	// 0 eof
+	// number of bytes read
 
+
+	//if EOF free 
+
+	//if malloc problem free 
+	if (read_result == 0)
+	{
+		// free ?
+		return (0);
+	}
 }
 
 int main(void)
