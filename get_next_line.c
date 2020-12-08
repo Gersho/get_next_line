@@ -6,7 +6,7 @@
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 15:32:28 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/07 14:57:07 by kzennoun         ###   ########lyon.fr   */
+/*   Updated: 2020/12/08 12:39:54 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ int get_next_line(int fd, char **line)
 	static char		*stock;
 	char			*buffer;
 	ssize_t			read_result;
+	int				newline_index;
 
-	if (!(buffer = malloc(sizeof(char) * BUFFER_SIZE)))
-		return (NULL);
+	if (fd <= 0 || !line || !(buffer = malloc(sizeof(char) * BUFFER_SIZE)))
+		return (-1);
 
 	read_result = read(fd, buffer, BUFFER_SIZE);
 	if (read_result == -1)
@@ -27,26 +28,42 @@ int get_next_line(int fd, char **line)
 		//free ?
 		return (-1);
 	}
-	if(stock &&)
-	
+	if (stock)
+		if(newline_index = ft_str_find_c(stock, '\n', ft_strlen(stock)))
+		{
+			line[0] = ft_strljoin("", stock, newline_index);
+			return (1);
+		}
+	while ((read_result = read(fd, buffer, BUFFER_SIZE)) != -1)
+	{
 
+		// add a \0 at the end of stock
+		if (read_result == 0)
+		{
+			
+		}
+
+	}
 	//read result == number of bytes read
-	
-	
-
 	//read returns
 	// -1 error
 	// 0 eof
 	// number of bytes read
 
+	// gnl returns
+	// 1 : Une ligne a été lue
+	// 0 : La fin de fichier a été atteinte
+	// -1 : Une erreur est survenue
+
 
 	//if EOF free 
 
 	//if malloc problem free 
-	if (read_result == 0)
-	{
-		// free ?
-		return (0);
+	if (read_result == -1 || read_result == 0)
+	{	
+		free(stock);
+		free(buffer);
+		return (read_result);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 15:32:30 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/07 15:16:14 by kzennoun         ###   ########lyon.fr   */
+/*   Updated: 2020/12/08 12:49:28 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,26 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (casted_dst);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strljoin(char const *s1, char const *s2, size_t size)
 {
-	int		len1;
-	int		len2;
+	int		len_s1;
 	char	*ptr;
 
 	if (!s1 || !s2)
 		return (NULL);
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	if (!(ptr = malloc((len1 + len2 + 1) * sizeof(char))))
+	len_s1 = ft_strlen(s1);
+	if (!(ptr = malloc((len_s1 + size + 1) * sizeof(char))))
 		return (NULL);
-	ft_memcpy((ft_memcpy(ptr, s1, len1) + len1), s2, len2 + 1);
+	ft_memcpy((ft_memcpy(ptr, s1, len_s1) + len_s1), s2, size + 1);
 	return (ptr);
+}
+
+size_t	ft_strlen(const char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
