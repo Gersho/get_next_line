@@ -6,7 +6,7 @@
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 15:32:28 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/08 12:39:54 by kzennoun         ###   ########lyon.fr   */
+/*   Updated: 2020/12/09 16:51:36 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,38 @@
 
 int get_next_line(int fd, char **line)
 {
+	static char		*stocked;
+	char			*buffer;
+	ssize_t			read_result;
+	ssize_t			newline_index;
+
+	buffer = NULL;
+	if (fd < 0 || !line || !(buffer = malloc(sizeof(char) * BUFFER_SIZE)))
+		return (-1);
+	if (stocked)
+		if(newline_index = ft_str_find_c(stocked, '\n', ft_strlen(stocked)))
+		{
+			//redo with substr
+			//line[0] = ft_strljoin("", stocked, newline_index);
+			line[0] = ft_substr(stocked, 0, newline_index);
+			stocked = ft_memmove(stocked, stocked + newline_index, \
+					ft_strlen(stocked + newline_index));
+			return (1);
+		}
+
+	while ((read_result = read(fd, buffer, BUFFER_SIZE)) != -1)
+	{
+
+
+	}
+
+	if (read_result == -1 || read_result == 0)
+	{	
+		free(stocked);
+		free(buffer);
+		return (read_result);
+	}
+	/*
 	static char		*stock;
 	char			*buffer;
 	ssize_t			read_result;
@@ -36,12 +68,16 @@ int get_next_line(int fd, char **line)
 		}
 	while ((read_result = read(fd, buffer, BUFFER_SIZE)) != -1)
 	{
-
 		// add a \0 at the end of stock
 		if (read_result == 0)
 		{
-			
+			if (stock)
+				if(newline_index = ft_str_find_c(stock, '\n', ft_strlen(stock)))
+					line[0] = ft_strljoin(stock, buffer, BUFFER_SIZE);
+			return (0);
 		}
+
+
 
 	}
 	//read result == number of bytes read
@@ -65,11 +101,7 @@ int get_next_line(int fd, char **line)
 		free(buffer);
 		return (read_result);
 	}
-}
-
-int main(void)
-{
-
+	*/
 }
 
 /*
@@ -97,5 +129,5 @@ Ecrivez une fonction qui retourne une ligne lue
 depuis un file descriptor, sans le retour à laligne
 
 
-gcc -Wall -Wextra -Werror -D BUFFER_SIZE=32 get_next_line.cget_next_line_utils.c
+gcc -Wall -Wextra -Werror -D BUFFER_SIZE=32 get_next_line.c get_next_line_utils.c
 */
