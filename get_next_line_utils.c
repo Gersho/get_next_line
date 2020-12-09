@@ -6,7 +6,7 @@
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 15:32:30 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/09 16:46:11 by kzennoun         ###   ########lyon.fr   */
+/*   Updated: 2020/12/09 17:09:27 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ ssize_t	ft_str_find_c(char *str, char c, ssize_t size)
 	}
 	return (-1);
 }
-/* 
+
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	unsigned char	*casted_dst;
@@ -44,7 +44,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	}
 	return (casted_dst);
 }
-*/
+
 char	*ft_strljoin(char const *s1, char const *s2, size_t size)
 {
 	int		len_s1;

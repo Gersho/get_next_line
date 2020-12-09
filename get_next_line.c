@@ -6,7 +6,7 @@
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 15:32:28 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/09 16:51:36 by kzennoun         ###   ########lyon.fr   */
+/*   Updated: 2020/12/09 17:47:50 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,24 @@ int get_next_line(int fd, char **line)
 
 	while ((read_result = read(fd, buffer, BUFFER_SIZE)) != -1)
 	{
+		
+		if(newline_index = ft_str_find_c(buffer, '\n', BUFFER_SIZE))
+		{
+			// if \n in buffer
+			// join stocked et buffer jusqu'a \n dans line[0]
+			line[0] = ft_strljoin(stocked, buffer, newline_index);
+			// mettre la suite de buffer dans stocked
+			// return 1
 
+		}
+		else
+		{
+			//if NO \n in buffer
+			// join stocked et buffer (remalloc stocked ? temp de transfer ?)
+			// continue;
+
+		}
+	
 
 	}
 
