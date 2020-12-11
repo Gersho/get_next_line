@@ -6,7 +6,7 @@
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 15:32:28 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/09 17:47:50 by kzennoun         ###   ########lyon.fr   */
+/*   Updated: 2020/12/11 15:55:54 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,112 +14,51 @@
 
 int get_next_line(int fd, char **line)
 {
-	static char		*stocked;
-	char			*buffer;
-	ssize_t			read_result;
+	char			buffer[BUFFER_SIZE];
+	static t_gnl	*stock;
 	ssize_t			newline_index;
+	ssize_t			read_return;
+	char			*temp;
 
-	buffer = NULL;
-	if (fd < 0 || !line || !(buffer = malloc(sizeof(char) * BUFFER_SIZE)))
-		return (-1);
-	if (stocked)
-		if(newline_index = ft_str_find_c(stocked, '\n', ft_strlen(stocked)))
-		{
-			//redo with substr
-			//line[0] = ft_strljoin("", stocked, newline_index);
-			line[0] = ft_substr(stocked, 0, newline_index);
-			stocked = ft_memmove(stocked, stocked + newline_index, \
-					ft_strlen(stocked + newline_index));
-			return (1);
-		}
-
-	while ((read_result = read(fd, buffer, BUFFER_SIZE)) != -1)
+	if(!stock)
 	{
-		
-		if(newline_index = ft_str_find_c(buffer, '\n', BUFFER_SIZE))
-		{
-			// if \n in buffer
-			// join stocked et buffer jusqu'a \n dans line[0]
-			line[0] = ft_strljoin(stocked, buffer, newline_index);
-			// mettre la suite de buffer dans stocked
-			// return 1
-
-		}
-		else
-		{
-			//if NO \n in buffer
-			// join stocked et buffer (remalloc stocked ? temp de transfer ?)
-			// continue;
-
-		}
-	
-
+		stock = malloc(sizeof(t_gnl));
+		stock->str = malloc (sizeof(char));
+		stock->str[0] = 0;
+		stock->len = 0;
 	}
 
-	if (read_result == -1 || read_result == 0)
-	{	
-		free(stocked);
-		free(buffer);
-		return (read_result);
-	}
-	/*
-	static char		*stock;
-	char			*buffer;
-	ssize_t			read_result;
-	int				newline_index;
-
-	if (fd <= 0 || !line || !(buffer = malloc(sizeof(char) * BUFFER_SIZE)))
-		return (-1);
-
-	read_result = read(fd, buffer, BUFFER_SIZE);
-	if (read_result == -1)
-	{	
-		//free ?
-		return (-1);
-	}
-	if (stock)
-		if(newline_index = ft_str_find_c(stock, '\n', ft_strlen(stock)))
-		{
-			line[0] = ft_strljoin("", stock, newline_index);
-			return (1);
-		}
-	while ((read_result = read(fd, buffer, BUFFER_SIZE)) != -1)
+	while (!(newline_index = ft_str_find_c(stock->str, '\n', stock->len)))
 	{
-		// add a \0 at the end of stock
-		if (read_result == 0)
-		{
-			if (stock)
-				if(newline_index = ft_str_find_c(stock, '\n', ft_strlen(stock)))
-					line[0] = ft_strljoin(stock, buffer, BUFFER_SIZE);
-			return (0);
-		}
-
-
-
+		read_return = read(fd, buffer, BUFFER_SIZE);
+		temp = ft_gnl_join(stock, buffer, read_return);
+		stock->len += read_return;
+		free(stock->str);
+		stock->str = temp;
 	}
-	//read result == number of bytes read
-	//read returns
-	// -1 error
-	// 0 eof
-	// number of bytes read
 
-	// gnl returns
-	// 1 : Une ligne a été lue
-	// 0 : La fin de fichier a été atteinte
-	// -1 : Une erreur est survenue
+	// une fois qu'on a un \n dans stock
+	// \n @ newline_index
+	line[0] = 
 
 
-	//if EOF free 
-
-	//if malloc problem free 
-	if (read_result == -1 || read_result == 0)
-	{	
-		free(stock);
-		free(buffer);
-		return (read_result);
-	}
-	*/
 }
+
+
+/*
+!! derniere ligne \n pas garanti
+
+struct static pour stocker stock.len
+
+join dans static avan de testr \n
+
+detecter le \n dans la condition du while
+
+buffer[BUFFER_SIZE]
+
+
+
+*/
 
 /*
 
