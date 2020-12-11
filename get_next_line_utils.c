@@ -6,7 +6,7 @@
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 15:32:30 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/11 15:55:55 by kzennoun         ###   ########lyon.fr   */
+/*   Updated: 2020/12/11 16:20:29 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,25 +57,25 @@ char	*ft_gnl_join(t_gnl *stock, char const *s2, size_t size)
 	return (ptr);
 }
 
-char	*ft_gnl_substr(char const *s, int len_s, unsigned int start, size_t len)
+char	*ft_gnl_substr(char const *s, int len_s, unsigned int start, size_t size)
 {
 	char				*ptr;
 
 	if (!s)
 		return (NULL);
 	if (start >= len_s)
-		len = 0;
-	if (len_s - start < len)
+		size = 0;
+	if (len_s - start < size)
 	{
 		if (!(ptr = malloc((len_s - start + 1) * sizeof(char))))
 			return (NULL);
 	}
 	else
 	{
-		if (!(ptr = malloc((len + 1) * sizeof(char))))
+		if (!(ptr = malloc((size + 1) * sizeof(char))))
 			return (NULL);
 	}
-	ft_strlcpy(ptr, s + start, len + 1);
-	ptr[len] = '\0';
+	ft_strlcpy(ptr, s + start, size + 1);
+	ptr[size] = '\0';
 	return (ptr);
 }
