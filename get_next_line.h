@@ -6,7 +6,7 @@
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 16:30:26 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/12 14:27:45 by kzennoun         ###   ########lyon.fr   */
+/*   Updated: 2020/12/12 17:27:29 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,5 @@ int			ft_str_find_c(char *str, char c, int size);
 char				*ft_gnl_substr(char *s, size_t len_s, size_t start, size_t size);
 char				*ft_gnl_join(t_gnl *stock, char *s2, int size);
 void	*ft_calloc(size_t count, size_t size);
+int	ft_strlen(const char *str);
 #endif
