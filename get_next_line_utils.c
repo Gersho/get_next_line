@@ -6,26 +6,22 @@
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 15:32:30 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/12 14:37:24 by kzennoun         ###   ########lyon.fr   */
+/*   Updated: 2020/12/13 16:17:14 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
-int ft_str_find_c(char *str, char c, int size)
+int		ft_str_find_c(char *str, char c, int size)
 {
 	int	i;
-	(void)size;
 
+	(void)size;
 	i = 0;
 	while (str[i])
 	{
-		//printf("in_find:i:%d  c:%c\n", i, str[i]);
 		if (str[i] == c)
-		{
-			//printf("returning:%d\n", i);
 			return (i);
-		}
 		i++;
 	}
 	return (-1);
@@ -77,8 +73,7 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 	return (j);
 }
 
-
-int	ft_strlen(const char *str)
+int		ft_strlen(const char *str)
 {
 	int i;
 
@@ -88,7 +83,6 @@ int	ft_strlen(const char *str)
 	return (i);
 }
 
-
 char	*ft_gnl_join(t_gnl *stock, char *s2, int size)
 {
 	char	*ptr;
@@ -97,12 +91,12 @@ char	*ft_gnl_join(t_gnl *stock, char *s2, int size)
 		return (NULL);
 	if (!(ptr = ft_calloc((stock->len + size + 1), sizeof(char))))
 		return (NULL);
+	// printf("gnl_join stock->len:%d\n", stock->len);
+	// printf("gnl_join strlen(stock->str):%d\n", ft_strlen(stock->str));
 	stock->len = ft_strlen(stock->str);
-	//printf("in gnl_join stock.len:%d\n", stock->len);
 	ft_memcpy((ft_memcpy(ptr, stock->str, stock->len) + stock->len), s2, size);
 	return (ptr);
 }
-
 
 char	*ft_gnl_substr(char *s, size_t len_s, size_t start, size_t size)
 {
@@ -114,19 +108,18 @@ char	*ft_gnl_substr(char *s, size_t len_s, size_t start, size_t size)
 		size = 0;
 	if (len_s - start < size)
 	{
-		if (!(ptr = ft_calloc((len_s - start + 1) , sizeof(char))))
+		if (!(ptr = ft_calloc((len_s - start + 1), sizeof(char))))
 			return (NULL);
 	}
 	else
 	{
-		if (!(ptr = ft_calloc((size + 1) , sizeof(char))))
+		if (!(ptr = ft_calloc((size + 1), sizeof(char))))
 			return (NULL);
 	}
 	ft_strlcpy(ptr, s + start, size + 1);
 	ptr[size] = '\0';
 	return (ptr);
 }
-
 
 void	*ft_memset(void *b, int c, size_t len)
 {
@@ -142,7 +135,6 @@ void	*ft_memset(void *b, int c, size_t len)
 	}
 	return (b);
 }
-
 
 void	*ft_calloc(size_t count, size_t size)
 {
