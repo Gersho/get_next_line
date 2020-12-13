@@ -6,7 +6,7 @@
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 15:32:30 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/13 16:17:14 by kzennoun         ###   ########lyon.fr   */
+/*   Updated: 2020/12/13 16:40:37 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ char	*ft_gnl_join(t_gnl *stock, char *s2, int size)
 		return (NULL);
 	if (!(ptr = ft_calloc((stock->len + size + 1), sizeof(char))))
 		return (NULL);
-	// printf("gnl_join stock->len:%d\n", stock->len);
-	// printf("gnl_join strlen(stock->str):%d\n", ft_strlen(stock->str));
+	printf("gnl_join stock->len:%d\n", stock->len);
+	printf("gnl_join strlen(stock->str):%d\n", ft_strlen(stock->str));
 	stock->len = ft_strlen(stock->str);
 	ft_memcpy((ft_memcpy(ptr, stock->str, stock->len) + stock->len), s2, size);
 	return (ptr);

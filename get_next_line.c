@@ -6,7 +6,7 @@
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 15:32:28 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/13 16:17:50 by kzennoun         ###   ########lyon.fr   */
+/*   Updated: 2020/12/13 16:50:49 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ int	get_next_line(int fd, char **line)
 	free(stock->str);
 	stock->str = temp;
 	stock->len -= (newline_index);
-	//printf("BEFORE IF newline_index:%d\n", newline_index);
+	// printf("BEFORE IF newline_index:%d\n", newline_index);
 	// printf("BEFORE IF stock->len:%d\n", stock->len);
 	// printf("BEFORE IF ft_strlen(stock->str):%d\n", ft_strlen(stock->str));
 	// printf("BEFORE IF stock->str:%s\n", stock->str);
 	if (read_return == 0 && ((newline_index = ft_str_find_c(stock->str, '\n', stock->len)) == -1))
 	{
-		//printf("INSIDE IF newline_index:%d\n", newline_index);
+		// printf("INSIDE IF newline_index:%d\n", newline_index);
 		// printf("INSIDE IF stock->len:%d\n", stock->len);
 		// printf("INSIDE IF ft_strlen(stock->str):%d\n", ft_strlen(stock->str));
 		*line = ft_gnl_substr(stock->str, ft_strlen(stock->str), 0, ft_strlen(stock->str));
@@ -84,7 +84,7 @@ int	get_next_line(int fd, char **line)
 	return (read_return);
 }
 
-/* 
+
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -102,18 +102,19 @@ int main(void)
 
 	fd = open("test.txt", O_RDONLY);
 
-	while ((j = get_next_line(fd, &line)) || i < 11)
+	while ((j = get_next_line(fd, &line)) && i < 5)
 	{
 		printf("gnl loop:%d\ngnl return:%d\nline:%s\n",i, j,line);
 		printf("----------------\n");
+		free(line);
 		i++;
 
 	}
 printf("gnl loop:%d\ngnl return:%d\nline:%s\n",i, j,line);
 
-//while(1)
+while(1)
 {
 }
 
 }
- */
+ 
