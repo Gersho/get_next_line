@@ -6,7 +6,7 @@
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 15:32:30 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/13 16:40:37 by kzennoun         ###   ########lyon.fr   */
+/*   Updated: 2020/12/14 11:38:20 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,6 @@ int		ft_str_find_c(char *str, char c, int size)
 		i++;
 	}
 	return (-1);
-}
-
-void	*ft_memcpy(void *dst, const void *src, size_t n)
-{
-	unsigned char	*casted_dst;
-	unsigned char	*casted_src;
-	unsigned int	i;
-
-	casted_dst = (unsigned char *)dst;
-	casted_src = (unsigned char *)src;
-	if (dst == NULL && src == NULL)
-		return (casted_dst);
-	i = 0;
-	while (i < n)
-	{
-		casted_dst[i] = casted_src[i];
-		i++;
-	}
-	return (casted_dst);
 }
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size)
@@ -83,24 +64,43 @@ int		ft_strlen(const char *str)
 	return (i);
 }
 
+void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	unsigned char	*casted_dst;
+	unsigned char	*casted_src;
+	unsigned int	i;
+
+	casted_dst = (unsigned char *)dst;
+	casted_src = (unsigned char *)src;
+	if (dst == NULL && src == NULL)
+		return (casted_dst);
+	i = 0;
+	while (i < n)
+	{
+		casted_dst[i] = casted_src[i];
+		i++;
+	}
+	return (casted_dst);
+}
+
 char	*ft_gnl_join(t_gnl *stock, char *s2, int size)
 {
 	char	*ptr;
 
 	if (!stock || !s2)
 		return (NULL);
-	if (!(ptr = ft_calloc((stock->len + size + 1), sizeof(char))))
+	if (!(ptr = ft_calloc_zero((stock->len + size + 1), sizeof(char))))
 		return (NULL);
 	printf("gnl_join stock->len:%d\n", stock->len);
 	printf("gnl_join strlen(stock->str):%d\n", ft_strlen(stock->str));
-	stock->len = ft_strlen(stock->str);
+	//stock->len = ft_strlen(stock->str);
 	ft_memcpy((ft_memcpy(ptr, stock->str, stock->len) + stock->len), s2, size);
 	return (ptr);
 }
 
 char	*ft_gnl_substr(char *s, size_t len_s, size_t start, size_t size)
 {
-	char				*ptr;
+	char	*ptr;
 
 	if (!s)
 		return (NULL);
@@ -108,12 +108,12 @@ char	*ft_gnl_substr(char *s, size_t len_s, size_t start, size_t size)
 		size = 0;
 	if (len_s - start < size)
 	{
-		if (!(ptr = ft_calloc((len_s - start + 1), sizeof(char))))
+		if (!(ptr = ft_calloc_zero((len_s - start + 1), sizeof(char))))
 			return (NULL);
 	}
 	else
 	{
-		if (!(ptr = ft_calloc((size + 1), sizeof(char))))
+		if (!(ptr = ft_calloc_zero((size + 1), sizeof(char))))
 			return (NULL);
 	}
 	ft_strlcpy(ptr, s + start, size + 1);
@@ -121,27 +121,20 @@ char	*ft_gnl_substr(char *s, size_t len_s, size_t start, size_t size)
 	return (ptr);
 }
 
-void	*ft_memset(void *b, int c, size_t len)
+void	*ft_calloc_zero(size_t count, size_t size)
 {
+	void			*ptr;
 	size_t			i;
 	unsigned char	*str;
 
-	str = (unsigned char *)b;
-	i = 0;
-	while (i < len)
-	{
-		str[i] = (unsigned char)c;
-		i++;
-	}
-	return (b);
-}
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	void	*ptr;
-
 	if (!(ptr = malloc(count * size)))
 		return (NULL);
-	ft_memset(ptr, 0, count * size);
+	str = (unsigned char *)ptr;
+	i = 0;
+	while (i < (count * size))
+	{
+		str[i] = (unsigned char)0;
+		i++;
+	}
 	return (ptr);
 }
