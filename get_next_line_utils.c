@@ -5,18 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 15:32:30 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/14 11:39:47 by kzennoun         ###   ########lyon.fr   */
+/*   Created: 2020/12/14 14:28:48 by kzennoun          #+#    #+#             */
+/*   Updated: 2020/12/14 16:37:55 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
-int		ft_str_find_c(char *str, char c, int size)
+
+int		ft_strlen(const char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+int		ft_str_find_c(char *str, char c)
 {
 	int	i;
 
-	(void)size;
 	i = 0;
 	while (str[i])
 	{
@@ -54,16 +63,6 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 	return (j);
 }
 
-int		ft_strlen(const char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	unsigned char	*casted_dst;
@@ -83,18 +82,17 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (casted_dst);
 }
 
-char	*ft_gnl_join(t_gnl *stock, char *s2, int size)
+char	*ft_gnl_join(char *stock, char *s2, int size)
 {
 	char	*ptr;
+	int		len;
 
 	if (!stock || !s2)
 		return (NULL);
-	if (!(ptr = ft_calloc_zero((stock->len + size + 1), sizeof(char))))
+	len = ft_strlen(stock);
+	if (!(ptr = ft_calloc_zero((len + size + 1), sizeof(char))))
 		return (NULL);
-	printf("gnl_join stock->len:%d\n", stock->len);
-	printf("gnl_join strlen(stock->str):%d\n", ft_strlen(stock->str));
-	stock->len = ft_strlen(stock->str);
-	ft_memcpy((ft_memcpy(ptr, stock->str, stock->len) + stock->len), s2, size);
+	ft_memcpy((ft_memcpy(ptr, stock, len) + len), s2, size);
 	return (ptr);
 }
 

@@ -5,17 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 15:32:28 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/14 11:38:50 by kzennoun         ###   ########lyon.fr   */
+/*   Created: 2020/12/14 14:28:45 by kzennoun          #+#    #+#             */
+/*   Updated: 2020/12/14 18:02:45 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
-int	get_next_line(int fd, char **line)
+int		get_next_line(int fd, char **line)
 {
 	char			buffer[BUFFER_SIZE];
-	static t_gnl	*stock;
+	static char		*stock;
 	int				newline_index;
 	int				read_return;
 	char			*temp;
@@ -24,67 +24,45 @@ int	get_next_line(int fd, char **line)
 		return (-1);
 	if (!stock)
 	{
-		stock = ft_calloc_zero(1, sizeof(t_gnl));
-		stock->str = ft_calloc_zero(1, sizeof(char));
-		stock->str[0] = 0;
-		stock->len = 0;
-	}
-	if (!stock->str)
-	{
-		stock->str = ft_calloc_zero(1, sizeof(char));
-		stock->str[0] = 0;
+		stock = ft_calloc_zero(1, sizeof(char));
+		stock[0] = 0;
 	}
 	read_return = 1;
-	while ((newline_index = ft_str_find_c(stock->str, '\n', stock->len)) == -1 && (read_return > 0))
+	while ((newline_index = ft_str_find_c(stock, '\n')) == -1 && (read_return > 0))
 	{
 		if ((read_return = read(fd, buffer, BUFFER_SIZE)) == -1)
 		{
-			free(stock->str);
 			free(stock);
 			return (-1);
 		}
-		printf("IN WHILE newline_index:%d\n", newline_index);
-		printf("IN WHILE stock->len:%d\n", stock->len);
-		printf("IN WHILE ft_strlen(stock->str):%d\n", ft_strlen(stock->str));
+		//printf("IN WHILE stock:%s\n", stock);
 		temp = ft_gnl_join(stock, buffer, read_return);
-		stock->len += read_return;
-		free(stock->str);
-		stock->str = temp;
-		printf("IN WHILE2 newline_index:%d\n", newline_index);
-		printf("IN WHILE2 stock->len:%d\n", stock->len);
-		printf("IN WHILE2 ft_strlen(stock->str):%d\n", ft_strlen(stock->str));
+		free(stock);
+		stock = temp;
 	}
-	*line = ft_gnl_substr(stock->str, stock->len, 0, newline_index);
-	temp = ft_gnl_substr(stock->str, stock->len, newline_index + 1, stock->len - newline_index);
-	free(stock->str);
-	stock->str = temp;
-	stock->len -= (newline_index);
-	printf("BEFORE IF newline_index:%d\n", newline_index);
-	printf("BEFORE IF stock->len:%d\n", stock->len);
-	printf("BEFORE IF ft_strlen(stock->str):%d\n", ft_strlen(stock->str));
-	printf("BEFORE IF stock->str:%s\n", stock->str);
-	if (read_return == 0 && ((newline_index = ft_str_find_c(stock->str, '\n', stock->len)) == -1))
+	*line = ft_gnl_substr(stock, ft_strlen(stock), 0, newline_index);
+	temp = ft_gnl_substr(stock, ft_strlen(stock), newline_index + 1, ft_strlen(stock) - newline_index);
+	free(stock);
+	stock = temp;
+	//printf("BEFORE IF stock:%s\n", stock);
+	if (read_return == 0 && ((newline_index = ft_str_find_c(stock, '\n')) == -1))
 	{
-		 printf("INSIDE IF newline_index:%d\n", newline_index);
-		 printf("INSIDE IF stock->len:%d\n", stock->len);
-		 printf("INSIDE IF ft_strlen(stock->str):%d\n", ft_strlen(stock->str));
-		*line = ft_gnl_substr(stock->str, ft_strlen(stock->str), 0, ft_strlen(stock->str));
-		free(stock->str);
-		stock->str = NULL;
+		*line = ft_gnl_substr(stock, ft_strlen(stock), 0, ft_strlen(stock));
+		//printf("line:%s\n", *line);
+		free(stock);
+		stock = NULL;
 		return (0);
 	}
-	if (stock->len != 0)
+	if (ft_strlen(stock) != 0)
 		return (1);
-	if (read_return == 0 && stock->len == 0)
+	if (read_return == 0 && ft_strlen(stock) == 0)
 	{
-		free(stock->str);
 		free(stock);
 		return (0);
 	}
 	return (read_return);
 }
-
-
+/*
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -102,7 +80,7 @@ int main(void)
 
 	fd = open("test.txt", O_RDONLY);
 
-	while ((j = get_next_line(fd, &line)) /*|| i < 15*/)
+	while ((j = get_next_line(fd, &line)) || i < 12)
 	{
 		printf("gnl loop:%d\ngnl return:%d\nline:%s\n",i, j,line);
 		printf("----------------\n");
@@ -117,3 +95,4 @@ printf("gnl loop:%d\ngnl return:%d\nline:%s\n",i, j,line);
 }
 
 }
+*/
