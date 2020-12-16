@@ -6,12 +6,12 @@
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 14:28:48 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/14 16:37:55 by kzennoun         ###   ########lyon.fr   */
+/*   Updated: 2020/12/16 15:25:35 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
+#include <stdio.h>
 int		ft_strlen(const char *str)
 {
 	int i;
@@ -86,13 +86,18 @@ char	*ft_gnl_join(char *stock, char *s2, int size)
 {
 	char	*ptr;
 	int		len;
-
+	
 	if (!stock || !s2)
 		return (NULL);
 	len = ft_strlen(stock);
 	if (!(ptr = ft_calloc_zero((len + size + 1), sizeof(char))))
 		return (NULL);
+	//printf("gnl_join strlen(stock):%d\n", ft_strlen(stock));
+	//printf("size: %d \n", size);
+	//printf("(len + size + 2): %d \n", (len + size + 2));
 	ft_memcpy((ft_memcpy(ptr, stock, len) + len), s2, size);
+	//temp = ft_memcpy(ptr, stock, len +1);
+	//ft_memcpy(temp, s2, size);
 	return (ptr);
 }
 
