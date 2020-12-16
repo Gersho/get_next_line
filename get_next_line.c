@@ -6,7 +6,7 @@
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 14:28:45 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/16 15:37:38 by kzennoun         ###   ########lyon.fr   */
+/*   Updated: 2020/12/16 16:43:59 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ int		get_next_line(int fd, char **line)
 	}
 	if (ft_strlen(stock) != 0)
 		return (1);
-		/*
+		
 	if (read_return == 0 && ft_strlen(stock) == 0)
 	{
 		free(stock);
-		stock = NULL;
+		//stock = NULL;
 		return (0);
 	}
-	*/
+	
 	return (1);
 }
  /*
@@ -90,7 +90,7 @@ int main(void)
 		//printf("----------------\n");
 		//printf("\e[1;34m %s \e[0m \n", line);
 		printf("%s\n", line);
-		printf("j:%d\n", j);
+		//printf("j:%d\n", j);
 		free(line);
 		i++;
 
@@ -98,8 +98,9 @@ int main(void)
 	//printf("gnl loop:%d\ngnl return:%d\nline:%s\n",i, j,line);
 	//printf("\e[1;34m %s \e[0m \n", line);
 	printf("%s\n", line);
-	printf("j:%d\n", j);
-	//while(1)
+	free(line);
+	//printf("j:%d\n", j);
+	while(1)
 	{	
 	}
 	
