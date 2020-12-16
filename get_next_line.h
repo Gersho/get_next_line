@@ -6,7 +6,7 @@
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 14:28:40 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/14 14:58:51 by kzennoun         ###   ########lyon.fr   */
+/*   Updated: 2020/12/16 16:49:00 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <unistd.h>
-
 
 int					get_next_line(int fd, char **line);
 int					ft_str_find_c(char *str, char c);
