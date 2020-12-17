@@ -6,7 +6,7 @@
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 14:28:45 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/17 15:57:42 by kzennoun         ###   ########lyon.fr   */
+/*   Updated: 2020/12/17 16:06:06 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,14 @@ int		get_next_line(int fd, char **line)
 	char			*temp;
 
 	if (fd < 0 || read(fd, 0, 0) || BUFFER_SIZE <= 0)
+	{
+		if (s)
+			free_and_return_int(s, -1);
 		return (-1);
+	}
 	if (!s)
-		s = ft_calloc_zero(1, sizeof(char));
+		if (!(s = ft_calloc_zero(1, sizeof(char))))
+			return (-1);
 	read_ret = 1;
 	while ((nl_i = ft_str_find_c(s, '\n')) == -1 && (read_ret > 0))
 	{
