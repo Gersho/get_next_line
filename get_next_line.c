@@ -6,7 +6,7 @@
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 14:28:45 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/17 16:06:06 by kzennoun         ###   ########lyon.fr   */
+/*   Updated: 2020/12/18 14:58:38 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int		gnl_bis(char **line, int nl_i, int read_ret, char **s)
 	*s = temp;
 	if (read_ret == 0 && ((nl_i = ft_str_find_c(*s, '\n')) == -1))
 	{
+		free(*line);
 		if ((*line = ft_gnl_substr(*s, ft_strlen(*s), 0, ft_strlen(*s)))
 		== NULL)
 			free_and_return_int(*s, -1);
