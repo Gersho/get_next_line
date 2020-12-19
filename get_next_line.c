@@ -6,7 +6,7 @@
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 14:28:45 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/18 14:58:38 by kzennoun         ###   ########lyon.fr   */
+/*   Updated: 2020/12/19 10:51:15 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,8 @@ int		gnl_bis(char **line, int nl_i, int read_ret, char **s)
 {
 	char	*temp;
 
-	if (((temp = ft_gnl_substr(*s, ft_strlen(*s), nl_i + 1, ft_strlen(*s) -
-	nl_i - 1)) == NULL) || (((*line = ft_gnl_substr(*s, ft_strlen(*s), 0, nl_i))
-	== NULL)))
-		free_and_return_int(*s, -1);
-	free(*s);
-	*s = temp;
 	if (read_ret == 0 && ((nl_i = ft_str_find_c(*s, '\n')) == -1))
 	{
-		free(*line);
 		if ((*line = ft_gnl_substr(*s, ft_strlen(*s), 0, ft_strlen(*s)))
 		== NULL)
 			free_and_return_int(*s, -1);
@@ -71,6 +64,12 @@ int		gnl_bis(char **line, int nl_i, int read_ret, char **s)
 		*s = NULL;
 		return (0);
 	}
+	if (((temp = ft_gnl_substr(*s, ft_strlen(*s), nl_i + 1, ft_strlen(*s) -
+	nl_i - 1)) == NULL) || (((*line = ft_gnl_substr(*s, ft_strlen(*s), 0, nl_i))
+	== NULL)))
+		free_and_return_int(*s, -1);
+	free(*s);
+	*s = temp;
 	return (1);
 }
 
@@ -82,7 +81,7 @@ int		get_next_line(int fd, char **line)
 	int				nl_i;
 	char			*temp;
 
-	if (fd < 0 || read(fd, 0, 0) || BUFFER_SIZE <= 0)
+	if (fd < 0 || read(fd, 0, 0) || BUFFER_SIZE <= 0 || !line)
 	{
 		if (s)
 			free_and_return_int(s, -1);
