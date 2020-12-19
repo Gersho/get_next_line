@@ -6,7 +6,7 @@
 /*   By: kzennoun <kzennoun@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 14:28:45 by kzennoun          #+#    #+#             */
-/*   Updated: 2020/12/19 10:51:15 by kzennoun         ###   ########lyon.fr   */
+/*   Updated: 2020/12/19 15:31:49 by kzennoun         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		gnl_bis(char **line, int nl_i, int read_ret, char **s)
 	{
 		if ((*line = ft_gnl_substr(*s, ft_strlen(*s), 0, ft_strlen(*s)))
 		== NULL)
-			free_and_return_int(*s, -1);
+			return (free_and_return_int(*s, -1));
 		free(*s);
 		*s = NULL;
 		return (0);
@@ -67,7 +67,7 @@ int		gnl_bis(char **line, int nl_i, int read_ret, char **s)
 	if (((temp = ft_gnl_substr(*s, ft_strlen(*s), nl_i + 1, ft_strlen(*s) -
 	nl_i - 1)) == NULL) || (((*line = ft_gnl_substr(*s, ft_strlen(*s), 0, nl_i))
 	== NULL)))
-		free_and_return_int(*s, -1);
+		return (free_and_return_int(*s, -1));
 	free(*s);
 	*s = temp;
 	return (1);
@@ -84,7 +84,7 @@ int		get_next_line(int fd, char **line)
 	if (fd < 0 || read(fd, 0, 0) || BUFFER_SIZE <= 0 || !line)
 	{
 		if (s)
-			free_and_return_int(s, -1);
+			return (free_and_return_int(s, -1));
 		return (-1);
 	}
 	if (!s)
@@ -95,7 +95,7 @@ int		get_next_line(int fd, char **line)
 	{
 		if (((read_ret = read(fd, buffer, BUFFER_SIZE)) == -1)
 			|| ((temp = ft_gnl_join(s, buffer, read_ret)) == NULL))
-			free_and_return_int(s, -1);
+			return (free_and_return_int(s, -1));
 		free(s);
 		s = temp;
 	}
